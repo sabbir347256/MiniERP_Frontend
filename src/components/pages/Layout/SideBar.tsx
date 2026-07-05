@@ -1,4 +1,4 @@
-import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, User, X, Zap } from "lucide-react";
+import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, ShoppingBag, Sparkles, User, View, X, Zap } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 
@@ -9,38 +9,30 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
 
     const menuItems = [
         { path: '/', label: 'Dashboard', icon: LayoutGrid },
-        {
-            label: 'Earn Money',
-            icon: DollarSign,
-            isDropdown: true,
-            children: [
-                { path: '/daily-surveys', label: 'Daily Surveys', icon: ClipboardList },
-                { path: '/Offerwalls', label: 'Offerwalls', icon: ClipboardList },
-                { path: '/offers', label: 'Offers', icon: Zap }
-            ]
-        },
+        { path: '/manage-products', label: 'Manage Products', icon: ShoppingBag },
+        { path: '/create-sales', label: 'Create Sales', icon: Sparkles },
+        { path: '/view-products', label: 'View Products', icon: View },
         { path: '/user-register', label: 'Register', icon: User },
-        // { path: '/rewards', label: 'Rewards', icon: CreditCard },
-        // { path: '/insights', label: 'Insights', icon: TrendingUp },
+       
     ];
 
     const bottomItems = [
         { path: '/logout', label: 'Logout', icon: LogOut },
     ];
 
-    const linkClass = ({ isActive } : any) =>
+    const linkClass = ({ isActive }: any) =>
         `flex items-center gap-3 px-4 py-3 mx-2 mt-1 text-[14px] font-medium duration-200 group relative border-r-4 border-transparent ${isActive
             ? 'bg-[#E2F0FD] globalTextColor font-semibold globalBorderColor'
             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
         } ${isCollapsed ? 'md:justify-center md:px-2 md:mx-1 md:border-l-0' : ''}`;
 
-    const dropdownClass = (isChildActive : any) =>
+    const dropdownClass = (isChildActive: any) =>
         `w-full flex items-center justify-between px-4 py-3 mx-2 mt-1 text-[14px] font-medium duration-200 group border-r-4 border-transparent cursor-pointer ${isChildActive
             ? 'text-blue-600 font-semibold'
             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
         } ${isCollapsed ? 'md:justify-center md:px-2 md:mx-1' : ''}`;
 
-    const childLinkClass = ({ isActive }:  any) =>
+    const childLinkClass = ({ isActive }: any) =>
         `flex items-center gap-3 pl-10 pr-4 py-2 mx-2 mt-1 text-[13px] font-medium duration-200 border-r-4 border-transparent ${isActive
             ? 'bg-[#E2F0FD] globalTextColor font-semibold globalBorderColor'
             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
@@ -78,11 +70,11 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                     </div>
 
                     <div className="flex flex-col gap-0.5 px-2">
-                        {menuItems.map((item, index) => {
+                        {menuItems.map((item : any, index) => {
                             const Icon = item.icon;
 
                             if (item.isDropdown) {
-                                const isChildActive = item.children.some(child => location.pathname === child.path);
+                                const isChildActive = item.children.some((child : any) => location.pathname === child.path);
                                 return (
                                     <div key={index} className="w-full">
                                         <div
@@ -104,7 +96,7 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
 
                                         {isEarnDropdownOpen && !isCollapsed && (
                                             <div className="flex flex-col mt-0.5 bg-gray-50/50 rounded-lg pb-1">
-                                                {item.children.map((child) => {
+                                                {item.children.map((child : any) => {
                                                     const ChildIcon = child.icon;
                                                     return (
                                                         <NavLink

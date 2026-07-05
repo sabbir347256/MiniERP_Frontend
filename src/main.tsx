@@ -7,6 +7,7 @@ import AuthContext from './components/AuthProvider/AuthContext.tsx';
 import Layout from './components/pages/Layout/Layout.tsx';
 import UserManagement from './components/pages/AdminPanel/UserManagement/UserManagement.tsx';
 import Login from './components/pages/Authentication/Login.tsx';
+import ProductManagement from './components/pages/AdminPanel/productmanagement/ProductManagement.tsx';
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
         {
           path : '/user-register',
           element : <UserManagement></UserManagement>
-        }
+        },
+        {
+          path : '/manage-products',
+          element : <ProductManagement></ProductManagement>
+        },
     ]
   },
   {
