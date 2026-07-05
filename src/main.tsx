@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import AuthContext from './components/AuthProvider/AuthContext.tsx';
 import Layout from './components/pages/Layout/Layout.tsx';
 import UserManagement from './components/pages/AdminPanel/UserManagement/UserManagement.tsx';
+import Login from './components/pages/Authentication/Login.tsx';
 
 const queryClient = new QueryClient();
 
@@ -20,10 +21,10 @@ const router = createBrowserRouter([
         }
     ]
   },
-  // {
-  //   path: '/user-login',
-  //   element: <UserLogin></UserLogin>
-  // }
+  {
+    path: '/user-login',
+    element: <Login></Login>
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(

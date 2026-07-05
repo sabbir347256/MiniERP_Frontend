@@ -4,6 +4,7 @@ import FormWrapper from "../../utils/FormWrapper";
 import FormInput from "../../utils/FormInput";
 import FormSelect from "../../utils/FormSelect";
 import SearchInput from "../../utils/SearchInput";
+import { Toaster } from "sonner";
 
 const UserManagement = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +21,7 @@ const UserManagement = () => {
     };
     return (
         <div className="bg-gray-50 min-h-screen space-y-8">
+            <Toaster position="top-right" richColors></Toaster>
             <div className=" bg-white p-6 shadow-md rounded-xl border border-gray-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Create System User</h2>
 
