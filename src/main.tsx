@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import AuthContext from './components/AuthProvider/AuthContext.tsx';
 import Layout from './components/pages/Layout/Layout.tsx';
+import UserManagement from './components/pages/AdminPanel/UserManagement/UserManagement.tsx';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout></Layout>,
     children: [
-
+        {
+          path : '/user-register',
+          element : <UserManagement></UserManagement>
+        }
     ]
   },
   // {

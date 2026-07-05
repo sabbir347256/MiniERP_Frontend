@@ -1,4 +1,4 @@
-import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, X, Zap } from "lucide-react";
+import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, User, X, Zap } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 
@@ -19,6 +19,7 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                 { path: '/offers', label: 'Offers', icon: Zap }
             ]
         },
+        { path: '/user-register', label: 'Register', icon: User },
         // { path: '/rewards', label: 'Rewards', icon: CreditCard },
         // { path: '/insights', label: 'Insights', icon: TrendingUp },
     ];
