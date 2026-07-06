@@ -9,6 +9,7 @@ import UserManagement from './components/pages/AdminPanel/UserManagement/UserMan
 import Login from './components/pages/Authentication/Login.tsx';
 import ProductManagement from './components/pages/AdminPanel/productmanagement/ProductManagement.tsx';
 import Sales from './components/pages/AdminPanel/SalesManagement/Sales.tsx';
+import ProductView from './components/pages/AdminPanel/productmanagement/ProductView.tsx';
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         {
           path : '/create-sales',
           element : <Sales></Sales>
+        },
+        {
+          path : '/view-products',
+          element : <ProductView></ProductView>
         },
     ]
   },
