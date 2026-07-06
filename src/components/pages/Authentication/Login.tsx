@@ -44,12 +44,12 @@ const Login = () => {
     return (
         <div>
             <Toaster position="top-right" richColors={false}></Toaster>
-            <div className="min-h-screen flex items-center justify-center bg-slate-900 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black px-4">
+            <div className="min-h-screen flex items-center justify-center bg-slate-900 px-4">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-5 pointer-events-none" />
 
                 <div className="w-full max-w-md bg-slate-900/60 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-slate-800/80 relative z-10">
                     <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-indigo-500 to-violet-500 rounded-xl shadow-lg shadow-indigo-500/20 mb-4">
+                        <div className="inline-flex items-center justify-center w-14 h-14  rounded-xl shadow-lg shadow-indigo-500/20 mb-4">
                             <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
@@ -92,7 +92,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={loginMutation.isPending}
-                                className="w-full relative flex items-center justify-center py-2.5 px-4 bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 active:scale-[0.98] text-white font-semibold rounded-lg shadow-lg shadow-indigo-500/10 focus:outline-none transition-all disabled:opacity-50 disabled:pointer-events-none"
+                                className="w-full relative flex items-center justify-center py-2.5 px-4  hover:from-indigo-600 hover:to-violet-600 active:scale-[0.98] text-white font-semibold rounded-lg shadow-lg shadow-indigo-500/10 focus:outline-none transition-all disabled:opacity-50 disabled:pointer-events-none"
                             >
                                 {loginMutation.isPending ? (
                                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

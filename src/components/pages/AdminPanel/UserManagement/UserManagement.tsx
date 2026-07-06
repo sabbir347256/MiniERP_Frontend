@@ -20,7 +20,7 @@ const UserManagement = () => {
         registerMutation.mutate(data);
     };
     return (
-        <div className="bg-gray-50 min-h-screen space-y-8">
+        <div className="bg-gray-50 min-h-screen ">
             <Toaster position="top-right" richColors></Toaster>
             <div className=" bg-white p-6 shadow-md rounded-xl border border-gray-200">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Create System User</h2>
@@ -44,7 +44,7 @@ const UserManagement = () => {
                 </FormWrapper>
             </div>
 
-            <div className="bg-white p-6 shadow-md rounded-xl border border-gray-200">
+            <div className="bg-white p-6 shadow-md rounded-xl border border-gray-200 mt-7">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                     <h2 className="text-xl font-bold text-gray-800">System Users</h2>
                     <SearchInput onSearch={(val) => setSearchTerm(val)} placeholder="Search users by name or email..." />

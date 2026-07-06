@@ -2,11 +2,18 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 import { toast } from "sonner";
 
+const token = localStorage.getItem('accessToken');
+
 export const useGetProducts = (queryParams: Record<string, any>) => {
     return useQuery({
         queryKey: ['products', queryParams],
         queryFn: async () => {
-            const { data } = await axiosInstance.get('/product', { params: queryParams });
+            const { data } = await axiosInstance.get('/product', {
+                params: queryParams,
+                headers: {
+                    'Authorization': `Bearer ${token || ''}`
+                }
+            });
             return data;
         },
     });
@@ -50,7 +57,11 @@ export const useDeleteProduct = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (id: string) => {
-            const { data } = await axiosInstance.delete(`/product/${id}`);
+            const { data } = await axiosInstance.delete(`/product/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token || ''}`
+                }
+            });
             return data;
         },
         onSuccess: (data) => {
