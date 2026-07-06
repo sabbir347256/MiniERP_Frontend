@@ -1,6 +1,5 @@
 import { Bell, HelpCircle, LogOut, Menu, Search, User } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router";
 import { toast, Toaster } from "sonner";
 import logo from '../../../../src/images/logo.png';
 

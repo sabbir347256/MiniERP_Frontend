@@ -12,7 +12,7 @@ interface AuthProviderProps {
 }
 
 const AuthContext = ({ children }: AuthProviderProps) => {
-    const [token, setToken] = useState<string | null>(() =>
+    const [token, setTokenState] = useState<string | null>(() =>
         typeof window !== "undefined" ? localStorage.getItem("accessToken") : null
     );
 
@@ -25,6 +25,17 @@ const AuthContext = ({ children }: AuthProviderProps) => {
             return null;
         }
     }, [token]);
+
+    const setToken = (newToken: string | null | ((prev: string | null) => string | null)) => {
+        if (typeof window !== "undefined") {
+            if (newToken === null) {
+                localStorage.removeItem("accessToken");
+            } else if (typeof newToken === "string") {
+                localStorage.setItem("accessToken", newToken);
+            }
+        }
+        setTokenState(newToken);
+    };
 
     const loading = false;
 

@@ -1,19 +1,30 @@
-import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, ShoppingBag, Sparkles, User, View, X, Zap } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, ClipboardList, Columns2, DollarSign, LayoutGrid, LogOut, LogOutIcon, ShoppingBag, Sparkles, User, View, X, Zap } from "lucide-react";
+import { useContext, useState } from "react";
 import { NavLink, useLocation } from "react-router";
+import { AuthProvider } from "../../AuthProvider/CreateContext";
+import { toast, Toaster } from "sonner";
 
 const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => {
+    const auth = useContext(AuthProvider);
+    const user = auth?.user;
     const [isEarnDropdownOpen, setIsEarnDropdownOpen] = useState(false);
 
     const location = useLocation();
 
     const menuItems = [
         { path: '/', label: 'Dashboard', icon: LayoutGrid },
-        { path: '/manage-products', label: 'Manage Products', icon: ShoppingBag },
-        { path: '/create-sales', label: 'Create Sales', icon: Sparkles },
-        { path: '/view-products', label: 'View Products', icon: View },
-        { path: '/user-register', label: 'Register', icon: User },
-       
+        ...(user?.role === 'ADMIN' || user?.role === 'MANAGER' ? [
+            { path: '/manage-products', label: 'Manage Products', icon: ShoppingBag }
+        ] : []),
+        ...(user?.role === 'ADMIN' || user?.role === 'MANAGER' || user?.role === 'EMPLOYEE' ? [
+            { path: '/create-sales', label: 'Create Sales', icon: Sparkles }
+        ] : []),
+        ...(user?.role === "ADMIN" || user?.role === 'EMPLOYEE' ? [
+            { path: '/view-products', label: 'View Products', icon: View }
+        ] : []),
+        ...(user?.role === 'ADMIN' ? [
+            { path: '/user-register', label: 'Register', icon: User }
+        ] : []),
     ];
 
     const bottomItems = [
@@ -38,6 +49,16 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
             : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
         } ${isCollapsed ? 'md:pl-4 md:justify-center' : ''}`;
 
+
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        toast.success('Logout Successfull...!!');
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    };
+
     return (
         <div>
             {isOpen && (
@@ -46,6 +67,7 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                     onClick={closeSidebar}
                 />
             )}
+            <Toaster position="top-right" richColors></Toaster>
 
             <aside className={`fixed top-0 bottom-0 left-0 bg-white border-r border-gray-200 flex flex-col justify-between py-4 z-50 transition-all duration-300 ${isCollapsed ? 'md:w-20' : 'md:w-64'
                 } ${isOpen ? 'translate-x-0 w-64' : '-translate-x-full md:translate-x-0'}`}>
@@ -70,11 +92,11 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                     </div>
 
                     <div className="flex flex-col gap-0.5 px-2">
-                        {menuItems.map((item : any, index) => {
+                        {menuItems.map((item: any, index) => {
                             const Icon = item.icon;
 
                             if (item.isDropdown) {
-                                const isChildActive = item.children.some((child : any) => location.pathname === child.path);
+                                const isChildActive = item.children.some((child: any) => location.pathname === child.path);
                                 return (
                                     <div key={index} className="w-full">
                                         <div
@@ -96,7 +118,7 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
 
                                         {isEarnDropdownOpen && !isCollapsed && (
                                             <div className="flex flex-col mt-0.5 bg-gray-50/50 rounded-lg pb-1">
-                                                {item.children.map((child : any) => {
+                                                {item.children.map((child: any) => {
                                                     const ChildIcon = child.icon;
                                                     return (
                                                         <NavLink
@@ -144,29 +166,17 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                 <div className="flex flex-col gap-1 px-2 overflow-x-hidden">
                     <div className="mx-4 my-2 border-t border-gray-100"></div>
 
-                    {bottomItems.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                            <NavLink
-                                key={item.path}
-                                to={item.path}
-                                className={linkClass}
-                                title={isCollapsed ? item.label : ""}
-                            >
-                                {({ isActive }) => (
-                                    <>
-                                        {isCollapsed && isActive && (
-                                            <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r" />
-                                        )}
-                                        {Icon && <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-600'}`} />}
-                                        <span className={`${isCollapsed ? 'md:hidden' : 'block'}`}>
-                                            {item.label}
-                                        </span>
-                                    </>
-                                )}
-                            </NavLink>
-                        );
-                    })}
+                    <button
+                        onClick={handleLogout}
+                        type="button"
+                        className={`${linkClass} w-full text-left cursor-pointer`}
+                        title={isCollapsed ? "Logout" : ""}
+                    >
+
+                        <span className={`flex  gap-2 items-center ${isCollapsed ? 'md:hidden' : 'block'}`}>
+                            <LogOutIcon size='16'></LogOutIcon> Logout
+                        </span>
+                    </button>
                 </div>
             </aside>
         </div>

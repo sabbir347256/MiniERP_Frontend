@@ -11,13 +11,14 @@ import ProductManagement from './components/pages/AdminPanel/productmanagement/P
 import Sales from './components/pages/AdminPanel/SalesManagement/Sales.tsx';
 import ProductView from './components/pages/AdminPanel/productmanagement/ProductView.tsx';
 import Dashboard from './components/pages/AdminPanel/Dashboard/Dashboard.tsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.tsx';
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout></Layout>,
+    element: <PrivateRoute><Layout></Layout></PrivateRoute>,
     children: [
       {
         index : true,
@@ -25,19 +26,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/user-register',
-        element: <UserManagement></UserManagement>
+        element: <PrivateRoute allowedRoles={['ADMIN']}><UserManagement></UserManagement></PrivateRoute>
       },
       {
         path: '/manage-products',
-        element: <ProductManagement></ProductManagement>
+        element: <PrivateRoute allowedRoles={['ADMIN','MANAGER']}><ProductManagement></ProductManagement></PrivateRoute>
       },
       {
         path: '/create-sales',
-        element: <Sales></Sales>
+        element: <PrivateRoute allowedRoles={['ADMIN','MANAGER','EMPLOYEE']}><Sales></Sales></PrivateRoute>
       },
       {
         path: '/view-products',
-        element: <ProductView></ProductView>
+        element: <PrivateRoute allowedRoles={['ADMIN','MANAGER','EMPLOYEE']}><ProductView></ProductView></PrivateRoute>
       },
     ]
   },
