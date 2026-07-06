@@ -53,7 +53,7 @@ const SideBar = ({ isOpen, closeSidebar, isCollapsed, setIsCollapsed }: any) => 
                 <div className="flex flex-col gap-6 overflow-x-hidden relative">
                     <div className={`flex items-center justify-between px-6 ${isCollapsed ? 'md:px-4 mb-5 w-full md:justify-center' : ''}`}>
                         <div className={`transition-all duration-200 ${isCollapsed ? 'md:hidden' : 'block'}`}>
-                            <h1 className="text-xl font-bold globalTextColor tracking-tight">SurveyPanel</h1>
+                            <h1 className="text-xl font-bold globalTextColor tracking-tight">ERP Panel</h1>
                             <p className="text-[11px] text-gray-400 font-medium tracking-wide">Respondent Portal</p>
                         </div>
 

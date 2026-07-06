@@ -6,7 +6,7 @@ import { AuthProvider } from "../../../AuthProvider/CreateContext";
 
 const Sales = () => {
     const auth = useContext(AuthProvider);
-    const { data: productRes } = useGetProducts({ limit: 100 });
+    const { data: productRes,refetch } = useGetProducts({ limit: 100 });
     const [basket, setBasket] = useState<{ productId: string; name: string; quantity: number; price: number; stock: number }[]>([]);
     const [grandTotal, setGrandTotal] = useState(0);
 
@@ -58,6 +58,7 @@ const Sales = () => {
             });
             toast.success(data?.message || 'Transaction executed and localized');
             setBasket([]);
+            refetch();
         } catch (error: any) {
             toast.error(error?.response?.data?.message || 'Transaction processing aborted');
         }

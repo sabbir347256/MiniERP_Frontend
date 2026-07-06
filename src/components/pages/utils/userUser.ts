@@ -2,11 +2,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 import { toast } from "sonner";
 
+
+const token = localStorage.getItem('accessToken')
+
 export const useGetUsers = (queryParams: Record<string, any>) => {
     return useQuery({
         queryKey: ['users', queryParams],
         queryFn: async () => {
-            const { data } = await axiosInstance.get('/user', { params: queryParams });
+            const { data } = await axiosInstance.get('/user', {
+                params: queryParams,
+                headers: {
+                    'Authorization': `Bearer ${token || ''}`
+                }
+            });
             return data;
         },
     });
@@ -17,7 +25,11 @@ export const useRegisterUser = () => {
 
     return useMutation({
         mutationFn: async (userData: any) => {
-            const { data } = await axiosInstance.post('/user/register', userData);
+            const { data } = await axiosInstance.post('/user/register', userData, {
+                headers: {
+                    'Authorization': `Bearer ${token || ''}`
+                }
+            });
             return data;
         },
         onSuccess: (data) => {

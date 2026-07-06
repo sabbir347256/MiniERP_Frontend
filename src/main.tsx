@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import Login from './components/pages/Authentication/Login.tsx';
 import ProductManagement from './components/pages/AdminPanel/productmanagement/ProductManagement.tsx';
 import Sales from './components/pages/AdminPanel/SalesManagement/Sales.tsx';
 import ProductView from './components/pages/AdminPanel/productmanagement/ProductView.tsx';
+import Dashboard from './components/pages/AdminPanel/Dashboard/Dashboard.tsx';
 
 const queryClient = new QueryClient();
 
@@ -18,22 +19,26 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout></Layout>,
     children: [
-        {
-          path : '/user-register',
-          element : <UserManagement></UserManagement>
-        },
-        {
-          path : '/manage-products',
-          element : <ProductManagement></ProductManagement>
-        },
-        {
-          path : '/create-sales',
-          element : <Sales></Sales>
-        },
-        {
-          path : '/view-products',
-          element : <ProductView></ProductView>
-        },
+      {
+        index : true,
+        element : <Dashboard></Dashboard>
+      },
+      {
+        path: '/user-register',
+        element: <UserManagement></UserManagement>
+      },
+      {
+        path: '/manage-products',
+        element: <ProductManagement></ProductManagement>
+      },
+      {
+        path: '/create-sales',
+        element: <Sales></Sales>
+      },
+      {
+        path: '/view-products',
+        element: <ProductView></ProductView>
+      },
     ]
   },
   {
